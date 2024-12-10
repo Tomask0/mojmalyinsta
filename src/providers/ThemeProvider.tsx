@@ -1,44 +1,37 @@
-// src/providers/ThemeProvider.tsx
-
 "use client";
 
 import * as React from 'react';
-import { createTheme, ThemeProvider as MUIThemeProvider, styled } from '@mui/material/styles';
+import { createTheme, ThemeProvider as MUIThemeProvider, CssBaseline } from '@mui/material';
 import { green, purple } from '@mui/material/colors';
-import Checkbox from '@mui/material/Checkbox';
 
-declare module '@mui/material/styles' {
-  interface Theme {
-    status: {
-      danger: string;
-    };
-  }
-  interface ThemeOptions {
-    status?: {
-      danger?: string;
-    };
-  }
-}
+const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+  const [darkMode, setDarkMode] = React.useState(false);
 
-// const CustomCheckbox = styled(Checkbox)(({ theme }) => ({
-//   color: theme.status.danger,
-//   '&.Mui-checked': {
-//     color: theme.status.danger,
-//   },
-// }));
+  const theme = React.useMemo(() =>
+    createTheme({
+      palette: {
+        mode: darkMode ? 'dark' : 'light',
+        primary: {
+          main: purple[500],
+        },
+        secondary: {
+          main: green[500],
+        },
+      },
+    }),
+    [darkMode]
+  );
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: purple[500],
-    },
-    secondary: {
-      main: green[500],
-    },
-  },
-});
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
 
-// Export the custom ThemeProvider
-export default function ThemeProvider({ children }: { children: React.ReactNode }) {
-  return <MUIThemeProvider theme={theme}>{children}</MUIThemeProvider>;
-}
+  return (
+    <MUIThemeProvider theme={theme}>
+      <CssBaseline />
+      {children}
+    </MUIThemeProvider>
+  );
+};
+
+export default ThemeProvider;
