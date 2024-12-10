@@ -1,4 +1,7 @@
 // src/providers/ThemeProvider.tsx
+
+"use client";
+
 import * as React from 'react';
 import { createTheme, ThemeProvider as MUIThemeProvider, styled } from '@mui/material/styles';
 import { green, purple } from '@mui/material/colors';
