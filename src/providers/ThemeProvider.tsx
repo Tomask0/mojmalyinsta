@@ -1,7 +1,7 @@
 // src/providers/ThemeProvider.tsx
 import * as React from 'react';
 import { createTheme, ThemeProvider as MUIThemeProvider, styled } from '@mui/material/styles';
-import { orange } from '@mui/material/colors';
+import { green, purple } from '@mui/material/colors';
 import Checkbox from '@mui/material/Checkbox';
 
 declare module '@mui/material/styles' {
@@ -25,8 +25,13 @@ declare module '@mui/material/styles' {
 // }));
 
 const theme = createTheme({
-  status: {
-    danger: orange[100],
+  palette: {
+    primary: {
+      main: purple[500],
+    },
+    secondary: {
+      main: green[500],
+    },
   },
 });
 
