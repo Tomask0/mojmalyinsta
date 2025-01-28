@@ -1,37 +1,60 @@
 "use client";
 
-import * as React from 'react';
-import { createTheme, ThemeProvider as MUIThemeProvider, CssBaseline } from '@mui/material';
-import { green, purple } from '@mui/material/colors';
+import React, { createContext, useContext, useState } from 'react';
+import { createTheme, ThemeProvider as MUIThemeProvider } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
+import { purple, green } from '@mui/material/colors';
 
-const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [darkMode, setDarkMode] = React.useState(false);
+// Define light and dark themes
+const lightTheme = createTheme({
+  palette: {
+    mode: 'light',
+    primary: {
+      main: purple[500],
+    },
+    secondary: {
+      main: green[500],
+    },
+  },
+});
 
-  const theme = React.useMemo(() =>
-    createTheme({
-      palette: {
-        mode: darkMode ? 'dark' : 'light',
-        primary: {
-          main: purple[500],
-        },
-        secondary: {
-          main: green[500],
-        },
-      },
-    }),
-    [darkMode]
-  );
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#ff5252',
+    },
+  },
+});
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
+// Create a context for the theme
+const ThemeContext = createContext<{
+  isDark: boolean;
+  toggleTheme: () => void;
+}>({
+  isDark: false,
+  toggleTheme: () => {},
+});
+
+// Custom hook to use the ThemeContext
+export const useThemeContext = () => useContext(ThemeContext);
+
+// ThemeProvider Component
+export default function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [isDark, setIsDark] = useState(false);
+
+  const toggleTheme = () => {
+    setIsDark((prev) => !prev);
   };
 
-  return (
-    <MUIThemeProvider theme={theme}>
-      <CssBaseline />
-      {children}
-    </MUIThemeProvider>
-  );
-};
+  const theme = isDark ? darkTheme : lightTheme;
 
-export default ThemeProvider;
+  return (
+    <ThemeContext.Provider value={{ isDark, toggleTheme }}>
+      <MUIThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </MUIThemeProvider>
+    </ThemeContext.Provider>
+  );
+}

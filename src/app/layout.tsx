@@ -1,29 +1,30 @@
-import { Metadata } from "next";
+// src/app/layout.tsx
+"use client";
+
 import "./globals.css";
 import Navbar from "../components/NavBar";
 import AuthProvider from "../components/AuthProvider";
-import CustomStyles from "../providers/ThemeProvider"; // Make sure this is named correctly
+import ThemeProvider from "../providers/ThemeProvider";
+import { Box } from "@mui/material";
 
-export const metadata: Metadata = {
-  title: "MojMalyInsta",
-  description: "maly lepsi ako velky",
-};
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="sk">
       <body>
-        <AuthProvider>
-          <CustomStyles>
-            <div style={{ minHeight: '95vh', display: 'flex', flexDirection: 'column' }}>
-              <main style={{ flexGrow: 1 }}>
+        <AuthProvider>          
+          <ThemeProvider>
+            <Box style={{ minHeight: '95vh', display: 'flex', flexDirection: 'column' }}>
+              <Box style={{ flexGrow: 1 }}>
                 {children}
-              </main>
-              <Navbar /> {/* No need to pass toggleDarkMode function */}
-            </div>
-          </CustomStyles>
+              </Box>
+              <Navbar /> 
+            </Box>
+          </ThemeProvider>
         </AuthProvider>
       </body>
     </html>

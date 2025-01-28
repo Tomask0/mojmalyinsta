@@ -1,5 +1,5 @@
 {
-  "name": "mojmalyinsta",
+  "name": "vlaciksisi",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,13 +11,14 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",
-    "@emotion/react": "^11.13.3",
-    "@emotion/styled": "^11.13.0",
-    "@mui/icons-material": "^6.1.10",
-    "@mui/material": "^6.1.2",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.1.2",
+    "@mui/material": "^6.4.0",
     "@prisma/client": "^6.0.1",
-    "next": "14.2.11",
+    "next": "^14.2.11",
     "next-auth": "^4.24.7",
+    "nextjs": "^0.0.3",
     "react": "^18",
     "react-dom": "^18"
   },

@@ -1,4 +1,4 @@
-# TOMASKO; IV.B; 1. skupina
+# Hugo Foltin; IV.B; 1. skupina
 
 ## linux
 ```ls``` -> listne current directory

@@ -11,7 +11,7 @@ export default function AuthedView() {
     const { data: session } = useSession();
 
   return (
-    <Typography variant="h4">Vitaj, {session?.user?.name}!</Typography>
+    <Typography variant="h4">Vitaj bezim, {session?.user?.name}!</Typography>
     
   );
 }
